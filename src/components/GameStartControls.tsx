@@ -1,4 +1,5 @@
 import { css } from "@emotion/react"
+import { MAX_PLAYERS } from "../constants"
 import Controls from "./Controls"
 
 type props = {
@@ -20,7 +21,7 @@ const GameStartControls = ({ onStart }: props) => {
           Please select the number of players:
         </h2>
         {
-          [...Array(10)].map((_, i) => (
+          [...Array(MAX_PLAYERS)].map((_, i) => (
             <button onClick={ () => onStart(i + 1) } key={ i }>
               { i + 1 }
             </button>
