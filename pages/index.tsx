@@ -48,7 +48,7 @@ const Home = () => {
     } else {
       return `You scored ${ max }. Congratulations!`
     }
-  }, [sessions])
+  }, [sessions, getPlayerName])
 
   const startGame = (nPlayers: number) => {
     setSessions([...Array(nPlayers)].map(_ => new Session([[]])))
@@ -73,7 +73,7 @@ const Home = () => {
         setCurrentSessionIndex(i)
       }
     }
-  }, [sessions, getNextSessionIndex])
+  }, [sessions, currentSessionIndex, getNextSessionIndex])
 
   const restartGame = () => {
     setIsGameStarted(false)
@@ -90,10 +90,24 @@ const Home = () => {
     const mainText = `Frame #${ frameIndex }, ball #${ ballIndex } for ${ playerName }`
     const subText = sessions.length > 1 ? "They scored" : "You scored"
     return [mainText, subText]
-  }, [sessions, currentSessionIndex])
+  }, [sessions, currentSessionIndex, getPlayerName])
 
   return (
     <div className="App" css={ styles }>
+      <a
+        css={
+          css`
+            color: #aaa !important;
+            display: block;
+            text-align: center;
+          `
+        }
+        href="https://github.com/stonekite/flair-bowling"
+        target="_blank"
+        rel="noreferrer"
+      >
+        https://github.com/stonekite/flair-bowling
+      </a>
       {
         isGameStarted ?
           isGameComplete ?
