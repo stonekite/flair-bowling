@@ -87,7 +87,10 @@ const Home = () => {
     const frameIndex = sessions[currentSessionIndex].length
     const ballIndex = sessions[currentSessionIndex].latestFrame.length + 1
     const playerName = getPlayerName(currentSessionIndex)
-    const mainText = `Frame #${ frameIndex }, ball #${ ballIndex } for ${ playerName }`
+    let mainText = `Frame #${ frameIndex }, ball #${ ballIndex }`
+    if (sessions.length > 1) {
+      mainText += ` for ${ playerName }`
+    }
     const subText = sessions.length > 1 ? "They scored" : "You scored"
     return [mainText, subText]
   }, [sessions, currentSessionIndex, getPlayerName])
