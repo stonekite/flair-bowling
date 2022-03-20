@@ -33,7 +33,7 @@ const Home = () => {
   ), [sessions])
 
   const getColor = useCallback((i: number = 0): string => {
-    return colors[(i + currentSessionIndex) % Math.min(colors.length, sessions.length)]
+    return colors[i % Math.min(colors.length, sessions.length)]
   }, [sessions, currentSessionIndex])
 
   const getNextSessionIndex = useCallback((): number => (
@@ -125,8 +125,8 @@ const Home = () => {
               subText={ gameText[1] }
               colors={
                 [
-                  getColor(),
-                  getColor(1)
+                  getColor(currentSessionIndex),
+                  getColor(currentSessionIndex + 1)
                 ]
               }
             /> :
@@ -136,10 +136,7 @@ const Home = () => {
       }
       {
         isGameStarted &&
-        [
-          ...sessions.slice(currentSessionIndex),
-          ...sessions.slice(0, currentSessionIndex)
-        ].map((session, i) => (
+        sessions.map((session, i) => (
           <Frames
             session={ session }
             color={ getColor(i) }
